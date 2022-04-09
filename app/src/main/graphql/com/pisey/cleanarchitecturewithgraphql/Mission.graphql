@@ -1,0 +1,9 @@
+query Mission($launchId: ID!) {
+  launch(id: $launchId) {
+    mission {
+      name
+      missionPatch
+    }
+  }
+
+}

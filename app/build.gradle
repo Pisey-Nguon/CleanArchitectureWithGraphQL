@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.apollographql.apollo3' version("3.2.1")
 }
 
 android {
@@ -12,7 +13,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -20,6 +21,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String","apiService",'"https://apollo-fullstack-tutorial.herokuapp.com/graphql"')
+        }
+
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String","apiService",'"https://apollo-fullstack-tutorial.herokuapp.com/graphql"')
         }
     }
     compileOptions {
@@ -29,9 +36,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {
+    def lifecycle_version = "2.4.1"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -40,4 +52,34 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // ViewModel utilities for Compose
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    
+    //Apollo
+    implementation "com.apollographql.apollo3:apollo-runtime:3.2.1"
+    //Security
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+    //Logging network
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    //Multidex
+    implementation "androidx.multidex:multidex:2.0.1"
+    //Gson
+    implementation 'com.google.code.gson:gson:2.9.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+
+
+}
+
+apollo {
+    packageName.set("com.pisey.cleanarchitecturewithgraphql")
 }
