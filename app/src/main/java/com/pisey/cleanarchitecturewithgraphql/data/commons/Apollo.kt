@@ -6,7 +6,7 @@ import com.apollographql.apollo3.network.okHttpClient
 import com.pisey.cleanarchitecturewithgraphql.BuildConfig
 import com.pisey.cleanarchitecturewithgraphql.LoginMutation
 import com.pisey.cleanarchitecturewithgraphql.MissionQuery
-import com.pisey.cleanarchitecturewithgraphql.utils.ContextApplication
+import com.pisey.cleanarchitecturewithgraphql.MyApplication
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -24,7 +24,7 @@ object Apollo {
         val okHttpClient = OkHttpClient.Builder()
             .addNetworkInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader("Authorization", User.getToken(ContextApplication.context) ?: "").build()
+                    .addHeader("Authorization", User.getToken(MyApplication.appContext!!) ?: "").build()
                 chain.proceed(request)
             }
             .addInterceptor(logging)

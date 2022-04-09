@@ -3,6 +3,7 @@ package com.pisey.cleanarchitecturewithgraphql.utils
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
@@ -18,6 +19,7 @@ abstract class BaseActivity<B : ViewBinding,VM:ViewModel>(val bindingFactory: (L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = bindingFactory(layoutInflater)
         setContentView(binding.root)
         onInitValue()
