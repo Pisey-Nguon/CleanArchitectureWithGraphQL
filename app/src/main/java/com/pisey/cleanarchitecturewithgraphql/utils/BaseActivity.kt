@@ -22,17 +22,17 @@ abstract class BaseActivity<B : ViewBinding,VM:ViewModel>(val bindingFactory: (L
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = bindingFactory(layoutInflater)
         setContentView(binding.root)
-        onInitValue()
-        onInitEventClick()
-        onInitEventViewModel()
-        onInitEventOther()
+        onInitialize()
+        onEventClick()
+        onEventViewModel()
+        onEventOther()
         onReady()
     }
 
-    abstract fun onInitValue()
-    abstract fun onInitEventClick()
-    abstract fun onInitEventViewModel()
-    abstract fun onInitEventOther()
+    abstract fun onInitialize()
+    abstract fun onEventClick()
+    abstract fun onEventViewModel()
+    abstract fun onEventOther()
     abstract fun onReady()
 
     open fun showLoading() {

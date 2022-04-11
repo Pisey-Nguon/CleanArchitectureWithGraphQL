@@ -19,16 +19,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
         val TAG = this::class.java.name.split(".").last()
     }
 
-    override fun onInitValue() {
+    override fun onInitialize() {
 
     }
-    override fun onInitEventClick() {
+    override fun onEventClick() {
         binding.btnLogin.setOnClickListener {
             viewModel.login(binding.editEmail.text.toString())
         }
     }
 
-    override fun onInitEventViewModel() {
+    override fun onEventViewModel() {
         viewModel.resultLogin.observe(this){ graphQLResult ->
             graphQLResult.onLoading {
                 Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
@@ -45,7 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
         }
     }
 
-    override fun onInitEventOther() {
+    override fun onEventOther() {
 
     }
 

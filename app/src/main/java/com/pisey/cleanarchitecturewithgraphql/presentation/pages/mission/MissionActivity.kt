@@ -14,15 +14,15 @@ class MissionActivity : BaseActivity<ActivityMissionBinding, MissionViewModel>(A
         val TAG = this::class.java.name.split(".").last()
     }
 
-    override fun onInitValue() {
+    override fun onInitialize() {
 
     }
 
-    override fun onInitEventClick() {
+    override fun onEventClick() {
 
     }
 
-    override fun onInitEventViewModel() {
+    override fun onEventViewModel() {
         viewModel.resultMission.observe(this){ graphQLResult ->
             graphQLResult.onLoading {
                 showLoading()
@@ -40,7 +40,7 @@ class MissionActivity : BaseActivity<ActivityMissionBinding, MissionViewModel>(A
         }
     }
 
-    override fun onInitEventOther() {
+    override fun onEventOther() {
 
     }
 
