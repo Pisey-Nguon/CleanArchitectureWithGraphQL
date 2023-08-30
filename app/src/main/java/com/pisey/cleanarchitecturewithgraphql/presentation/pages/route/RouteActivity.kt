@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.pisey.cleanarchitecturewithgraphql.data.commons.User
+import com.pisey.cleanarchitecturewithgraphql.data.data_sources.local.UserPref
 import com.pisey.cleanarchitecturewithgraphql.presentation.pages.home.MainActivity
 import com.pisey.cleanarchitecturewithgraphql.presentation.pages.mission.MissionActivity
 
@@ -15,11 +15,7 @@ class RouteActivity : Activity() {
         super.onCreate(savedInstanceState)
         // Keep the splash screen visible for this Activity
         splashScreen.setKeepOnScreenCondition { true }
-        if(User.getToken(this) == null){
-            startActivity(Intent(this, MainActivity::class.java))
-        }else{
-            startActivity(Intent(this, MissionActivity::class.java))
-        }
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 }

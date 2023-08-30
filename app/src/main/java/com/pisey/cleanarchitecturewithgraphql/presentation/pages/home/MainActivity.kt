@@ -2,56 +2,24 @@ package com.pisey.cleanarchitecturewithgraphql.presentation.pages.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.Toast
-import com.pisey.cleanarchitecturewithgraphql.data.commons.User
-import com.pisey.cleanarchitecturewithgraphql.data.commons.onError
-import com.pisey.cleanarchitecturewithgraphql.data.commons.onLoading
-import com.pisey.cleanarchitecturewithgraphql.data.commons.onSuccess
+import com.pisey.cleanarchitecturewithgraphql.data.data_sources.local.UserPref
 import com.pisey.cleanarchitecturewithgraphql.databinding.ActivityMainBinding
 import com.pisey.cleanarchitecturewithgraphql.presentation.pages.mission.MissionActivity
 import com.pisey.cleanarchitecturewithgraphql.utils.BaseActivity
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMainBinding::inflate,
-    MainViewModel::class.java) {
-    companion object{
-        val TAG = this::class.java.name.split(".").last()
-    }
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMainBinding::inflate, MainViewModel::class.java) {
 
-    override fun onInitialize() {
-
-    }
-    override fun onEventClick() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.loginLiveData.validateResultToAny {
+            it.login?.token?.let { token -> UserPref.setToken(this, token) }
+            finish()
+            val intent = Intent(this,MissionActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnLogin.setOnClickListener {
             viewModel.login(binding.editEmail.text.toString())
         }
     }
-
-    override fun onEventViewModel() {
-        viewModel.resultLogin.observe(this){ graphQLResult ->
-            graphQLResult.onLoading {
-                Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
-            }
-            graphQLResult.onSuccess {
-                it.data?.login?.token?.let { token -> User.setToken(this, token) }
-                finish()
-                val intent = Intent(this,MissionActivity::class.java)
-                startActivity(intent)
-            }
-            graphQLResult.onError {
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    override fun onEventOther() {
-
-    }
-
-    override fun onReady() {
-
-    }
-
 
 }

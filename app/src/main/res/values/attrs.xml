@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomStateView">
+        <attr name="state" format="enum">
+            <enum name="loading" value="0" />
+            <enum name="success" value="1" />
+            <enum name="empty" value="2" />
+            <enum name="failed" value="3" />
+            <enum name="error" value="4" />
+        </attr>
+
+        <attr name="loadingLayout" format="reference" />
+        <attr name="emptyLayout" format="reference" />
+    </declare-styleable>
+</resources>

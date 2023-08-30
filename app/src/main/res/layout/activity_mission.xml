@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<com.pisey.cleanarchitecturewithgraphql.presentation.components.CustomStateView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stateView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".presentation.pages.mission.MissionActivity">
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30dp"/>
-
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Your mission: "
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/txtMissionName"
+        android:layout_height="match_parent">
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="30dp"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Your mission: "
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/txtMissionName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <ImageView
+            android:id="@+id/ivMissionPatch"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30dp"/>
-    <ImageView
-        android:id="@+id/ivMissionPatch"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</com.pisey.cleanarchitecturewithgraphql.presentation.components.CustomStateView>
