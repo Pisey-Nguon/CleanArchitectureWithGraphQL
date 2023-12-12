@@ -12,11 +12,7 @@ class MainViewModel:ViewModel() {
     private val tutorialRepository = TutorialRepositoryImpl()
     val loginLiveData = MutableLiveData<CustomResult<LoginMutation.Data>>()
 
-    fun login(email:String){
-        viewModelScope.launch {
-            tutorialRepository.login(email).collect{
-                loginLiveData.postValue(it)
-            }
-        }
+    fun login(email:String) = viewModelScope.launch{
+        loginLiveData.postValue(tutorialRepository.login(email))
     }
 }

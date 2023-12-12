@@ -6,7 +6,7 @@ import com.sey.tutorial.MissionQuery
 import kotlinx.coroutines.flow.Flow
 
 interface TutorialRepository {
-    suspend fun login(email:String): Flow<CustomResult<LoginMutation.Data>>
+    suspend fun login(email:String): CustomResult<LoginMutation.Data>
 
-    suspend fun mission(launchId:String):Flow<CustomResult<MissionQuery.Data>>
+    suspend fun mission(launchId:String):CustomResult<MissionQuery.Data>
 }

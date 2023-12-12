@@ -45,7 +45,6 @@ abstract class BaseActivity<B : ViewBinding,VM:ViewModel>(val bindingFactory: (L
     fun <T : Any> MutableLiveData<CustomResult<T>>.validateResultToAny(onSuccess:(T)->Unit){
         this.observe(this@BaseActivity){
             when(it){
-                is CustomResult.Loading -> showLoading()
                 is CustomResult.Failed -> showDialogError(it.error.message)
                 is CustomResult.SomethingWentWrong -> showDialogError(it.error.message!!)
                 is CustomResult.Success -> {
@@ -60,7 +59,6 @@ abstract class BaseActivity<B : ViewBinding,VM:ViewModel>(val bindingFactory: (L
     fun <T : Any> MutableLiveData<CustomResult<T>>.validateResultToStateView(stateView: CustomStateView, onSuccess:(T)->Unit){
         this.observe(this@BaseActivity){
             when(it){
-                is CustomResult.Loading -> Unit
                 is CustomResult.Failed -> stateView.showFailed()
                 is CustomResult.SomethingWentWrong -> stateView.showSomethingWentWrong()
                 is CustomResult.Success -> {

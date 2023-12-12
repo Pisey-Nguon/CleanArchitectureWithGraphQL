@@ -12,11 +12,7 @@ class MissionViewModel:ViewModel() {
     private val tutorialRepository = TutorialRepositoryImpl()
     val missionLiveData = MutableLiveData<CustomResult<MissionQuery.Data>>()
 
-    fun getMission(launchId:String){
-        viewModelScope.launch {
-            tutorialRepository.mission(launchId).collect{
-                missionLiveData.postValue(it)
-            }
-        }
+    fun getMission(launchId:String) = viewModelScope.launch{
+        missionLiveData.postValue( tutorialRepository.mission(launchId))
     }
 }

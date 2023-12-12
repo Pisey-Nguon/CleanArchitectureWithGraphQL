@@ -10,17 +10,18 @@ private var instanceUser: ApolloClient? = null
 private var instanceOrder: ApolloClient? = null
 private var instanceLocation: ApolloClient? = null
 
-fun apolloTutorialClient():ApolloClient{
-    if (instanceTutorial != null) {
+val apolloTutorialClient:ApolloClient
+    get() {
+        if (instanceTutorial != null) {
+            return instanceTutorial!!
+        }
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(AuthorizationInterceptor())
+            .build()
+        instanceTutorial = ApolloClient.Builder()
+            .serverUrl(BuildConfig.apiService)
+            .okHttpClient(okHttpClient)
+            .build()
         return instanceTutorial!!
     }
-    val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(AuthorizationInterceptor())
-        .build()
-    instanceTutorial = ApolloClient.Builder()
-        .serverUrl(BuildConfig.apiService)
-        .okHttpClient(okHttpClient)
-        .build()
-    return instanceTutorial!!
-}
 
